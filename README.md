@@ -73,7 +73,14 @@ streamlit run app.py
 
 ## 📸 Output
 
-Interactive dashboard with charts and world map visualization.
+### Dashboard
+![Dashboard](images/dashboard.png)
+
+### Charts
+![Charts](images/chart.png)
+
+### World Map
+![Map](images/map.png)
 
 ---
 
