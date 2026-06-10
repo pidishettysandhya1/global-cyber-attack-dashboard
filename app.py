@@ -12,8 +12,8 @@ data = pd.read_csv("cyber_real.csv")
 st.sidebar.header("Filter Data")
 
 selected_country = st.sidebar.selectbox(
-    "Select Country",
-    options=["All"] + list(data["Country"].dropna().unique())
+    "🌍 Select Country",
+    ["All"] + sorted(data["Country"].dropna().unique())
 )
 
 if selected_country != "All":
@@ -23,13 +23,17 @@ else:
 
 # Show dataset
 st.subheader("📄 Dataset Preview")
-st.write(filtered_data.head())
+st.dataframe(filtered_data.head())
 
 # Dashboard
 st.subheader("📊 Dashboard")
 
 col1, col2 = st.columns(2)
-st.write(f"🌍 Total Countries in Dataset: {data['Country'].nunique()}")
+
+with col1:
+    st.metric("🌍 Total Countries", filtered_data["Country"].nunique())
+with col2:
+    st.metric("⚠️ Total Attacks", len(filtered_data))
 
 # Chart 1
 with col1:
@@ -79,4 +83,4 @@ fig_map = px.choropleth(
     title="Cyber Attacks by Country"
 )
 
-st.plotly_chart(fig_map)
+st.plotly_chart(fig_map, use_container_width=True)
